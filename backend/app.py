@@ -1,7 +1,7 @@
 from flask import Flask
-app = Flask(name)
+app = Flask(__name__)
 @app.route('/greet')
 def greet():
-return 'Hello from Backend Microservice!'
-if name == 'main':
-app.run(host='0.0.0.0', port=5000)
+    return 'Hello from Backend Microservice!'
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

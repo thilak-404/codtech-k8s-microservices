@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: backend
+namespace: default
+spec:
+replicas: 1
+selector:
+matchLabels:
+  app: backend
+template:
+metadata:
+  labels:
+    app: backend
+spec:
+  containers:
+  - name: backend
+    image: ghcr.io/thilak-404/codtech-k8s-microservices-backend:latest
+    ports:
+    - containerPort: 5000
+    readinessProbe:
+      httpGet:
+        path: /greet
+        port: 5000
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe:
+      httpGet:
+        path: /greet
+        port: 5000
+      initialDelaySeconds: 15
+      periodSeconds: 20
